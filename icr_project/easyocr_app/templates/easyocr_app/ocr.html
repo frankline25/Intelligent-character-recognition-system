@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +37,20 @@
             font-weight: bold;
             font-size: 1.5rem;
             letter-spacing: 1px;
+        }
+
+        /* Message alerts styling */
+        .message-container {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1050;
+            max-width: 350px;
+        }
+        
+        .alert-dismissible {
+            margin-bottom: 10px;
+            opacity: 0.95;
         }
 
         /* Dark mode styles */
@@ -86,7 +101,10 @@
                     <a class="nav-link active" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="{% url 'about-url' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login-url' %}">Logout</a>
                 </li>
             </ul>
             <!-- Dark mode switch -->
@@ -98,8 +116,23 @@
     </div>
 </nav>
 
-<div class="container mt-5 pt-5">
+<!-- Messages container -->
+<div class="d-flex justify-content-center mt-5 pt-4">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert fw-bold text-center px-5 py-3"
+                 role="alert"
+                 style="width: 600px; font-size: 1.1rem; background-color: #0d6efd; color: white;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
 
+
+
+
+<div class="container mt-5 pt-5">
     <!-- Upload Card -->
     <div class="row justify-content-center mb-4">
         <div class="col-md-6">
@@ -175,9 +208,21 @@
 <!-- Bootstrap JS and Dark Mode Toggle Script -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+    // Dark mode toggle
     const toggle = document.getElementById('darkModeToggle');
     toggle.addEventListener('change', function () {
         document.body.classList.toggle('dark-mode');
+    });
+    
+    // Auto-dismiss alerts after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                var bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
     });
 </script>
 </body>

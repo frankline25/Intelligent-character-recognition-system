@@ -1,0 +1,85 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block extra_head %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block content %}
+  <main>
+    <style>
+      /* Ensures the page takes full height */
+      html, body {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f4f4f4;
+        overflow: hidden; /* Prevents scrollbars */
+      }
+
+      /* Centers the signup container with the original width */
+      .signup-container {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 500px; /* Keeps the original width */
+        max-width: 100%;
+        text-align: left; /* Aligns form elements to the left */
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      /* Labels should be left-aligned */
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      /* Ensures inputs take full width */
+      input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .btn-info {
+        background-color: #007bff;
+        border: none;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      .btn-info:hover {
+        background-color: #0056b3;
+      }
+    </style>
+
+    <div class="signup-container">
+      <h1>{% trans "Sign Up" %}</h1>
+      
+      <form method="post" action="{% url 'signup-url' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-info" type="submit">{% trans "Sign Up" %}</button>
+  
+
+      </form>
+      <p style="text-align: right;"></p>Already have an account? <a href="{% url 'login-url' %}">Login here</a></p>
+    </div>
+  </main>
+{% endblock %}

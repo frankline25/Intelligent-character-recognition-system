@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - ICR System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f7fa;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+        .dark-mode {
+            background-color: #121212 !important;
+            color: #e0e0e0 !important;
+        }
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            color: white;
+        }
+        .dark-mode .card-header {
+            background-color: #333 !important;
+            color: #fff !important;
+        }
+        .dark-mode .navbar {
+            background-color: #222 !important;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="{% static 'easyocr_app/logo.jpg' %}" alt="Logo" width="40" height="40"
+                 style="border-radius: 50%; object-fit: cover;" class="me-2">
+            INTELLIGENT CHARACTER RECOGNITION SYSTEM
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav ms-auto me-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'ocr' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login-url' %}">Logout</a>
+                </li>
+            </ul>
+            <div class="form-check form-switch text-white">
+                <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card mb-4">
+                <div class="card-header">
+                    About the Intelligent Character Recognition (ICR) System
+                </div>
+                <div class="card-body">
+                    <p>
+                        Welcome to our Intelligent Character Recognition (ICR) system — an advanced tool designed to convert handwritten text into machine-readable digital data using artificial intelligence and deep learning.
+                    </p>
+                    <h5 class="mt-4">What is ICR?</h5>
+                    <p>
+                        ICR is an enhanced form of Optical Character Recognition (OCR) that goes beyond printed text to interpret handwritten characters, regardless of writing style, spacing, or slant. It uses machine learning algorithms to improve accuracy over time by learning from handwriting patterns.
+                    </p>
+
+                    <h5 class="mt-4">Project Objective</h5>
+                    <p>
+                        The primary goal of this system is to automate the reading and digitization of handwritten documents, forms, and notes — reducing human effort, saving time, and increasing accuracy in data processing.
+                    </p>
+
+                    <h5 class="mt-4">How It Works</h5>
+                    <ul>
+                        <li><strong>Image Upload:</strong> Users upload a scanned handwritten document or image.</li>
+                        <li><strong>Preprocessing:</strong> The image is cleaned and adjusted for better recognition (e.g., grayscale conversion, noise removal, thresholding).</li>
+                        <li><strong>Character Recognition:</strong> The core ICR engine, powered by EasyOCR and deep learning models, processes the image and extracts the handwritten text.</li>
+                        <li><strong>Output Generation:</strong> The recognized text is displayed or exported in digital format.</li>
+                    </ul>
+
+                    <h5 class="mt-4">Features</h5>
+                    <ul>
+                        <li>Supports multiple languages and handwriting styles</li>
+                        <li>High accuracy on both structured and unstructured handwritten inputs</li>
+                        <li>Clean and simple user interface for uploading and viewing results</li>
+                        <li>Built using Python, Django, and EasyOCR</li>
+                    </ul>
+
+                    <h5 class="mt-4">Applications</h5>
+                    <ul>
+                        <li>Digitizing handwritten notes and archives</li>
+                        <li>Processing handwritten forms (e.g., surveys, exams, applications)</li>
+                        <li>Automating data entry for business and government workflows</li>
+                        <li>Enhancing accessibility and searchability of written records</li>
+                    </ul>
+
+                    <h5 class="mt-4">Technology Stack</h5>
+                    <ul>
+                        <li><strong>Backend:</strong> Django (Python)</li>
+                        <li><strong>OCR Engine:</strong> EasyOCR with PyTorch</li>
+                        <li><strong>Frontend:</strong> HTML/CSS with Bootstrap</li>
+                        <li><strong>Tools:</strong> OpenCV, PIL for image preprocessing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS + Dark Mode Script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const toggle = document.getElementById('darkModeToggle');
+    toggle.addEventListener('change', function () {
+        document.body.classList.toggle('dark-mode');
+    });
+</script>
+</body>
+</html>

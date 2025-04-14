@@ -1,0 +1,123 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block extra_head %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block content %}
+<main>
+    <style>
+/* Ensures the page takes full height */
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8F9FA;
+    overflow: hidden;
+}
+
+/* Centers the signup container */
+.login-container {
+    background: #FFFFFF;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    width: 500px;
+    max-width: 100%;
+    text-align: left;
+}
+
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Inputs take full width */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    background: #FAFAFA; 
+    color: #333;
+}
+
+/* Primary button */
+.btn-info {
+    background-color: #D32F2F; /* Red primary button */
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: white; /* White text */
+    font-weight: bold;
+}
+
+.btn-info:hover {
+    background-color: #B71C1C; /* Darker red on hover */
+}
+
+/* Alert messages */
+.alert {
+    background-color: #D32F2F; /* Red alert box */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+    </style>
+
+    <div class="login-container">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success text-center">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <h1>{% trans "Login" %}</h1>
+
+        <form class="login" method="POST" action="{% url 'login-url' %}">
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+
+            {% csrf_token %}
+            
+            <div class="col-12">
+                {{ form|crispy }}
+            </div>
+
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+
+            <button class="btn btn-info" type="submit">{% trans "Login" %}</button>
+        </form>
+
+       <!--<div class="text-right">
+            {% url 'signup' as signup_url %}
+            {% blocktrans with signup_href=signup_url %}
+              Don't have an account? <a href="{{ signup-url }}">Sign up here</a>.
+            {% endblocktrans %}
+          </div>
+        -->
+        <div class="text-right">
+            Don't have an account? <a href="{% url 'signup-url' %}">Sign up here</a>.
+          </div>
+        
+    </div>
+    
+</main>
+{% endblock %}
